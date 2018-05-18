@@ -1,6 +1,4 @@
 package com.giacom.demo.univali.v1.controller;
-
-
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.giacom.demo.univali.domain.SampleUser;
 import com.giacom.demo.univali.exception.InvalidUserException;
 import com.giacom.demo.univali.service.SampleUserService;
 import com.giacom.demo.univali.v1.converter.UserConverter;
 import com.giacom.demo.univali.v1.dto.UserDTO;
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     @Autowired
@@ -32,8 +31,14 @@ public class UserController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public @ResponseBody
-    UserDTO getUserById(@PathVariable("id") String id) {
-        return UserConverter.toUserDTO(service.findById(id));
+    ResponseEntity<UserDTO> getUserById(@PathVariable("id") String id) {
+        SampleUser sampleUser;
+        try {
+            sampleUser = service.findById(id);
+            return ResponseEntity.ok(UserConverter.toUserDTO(sampleUser));
+        }catch (Exception e){}
+
+        return ResponseEntity.notFound().build();
     }
 
     @RequestMapping(value = "{name}/name", method = RequestMethod.GET)

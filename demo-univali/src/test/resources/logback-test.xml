@@ -21,6 +21,8 @@
     <logger name="org.mongodb" level="INFO" />
     <logger name="org.testcontainers.shaded" level="WARN"/>
     <logger name="com.zaxxer.hikari" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
 
     <turboFilter class="ch.qos.logback.classic.turbo.MarkerFilter">
         <Marker>PROFILER</Marker>

@@ -12,10 +12,12 @@ public class UserConverterTest {
     }
 
     @Test
-    public void toUserDTO1() {
+    public void toUserDTOList() {
+
     }
 
     @Test
     public void toSampleUser() {
+
     }
 }
